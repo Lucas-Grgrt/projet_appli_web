@@ -1,7 +1,5 @@
 package moteur_police;
 
-import java.awt.Image;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
@@ -18,24 +16,50 @@ public class Facade {
 	@PostConstruct
 	public void initialiser() {}
 	
-	//Map<Integer, Identite> personnes = new Hashtable<Integer, Identite>();
-	int idp = 0;
+	int photo = 0;
+	
+	String nom;
+	String prenom;
+	int numero;
 
-	public void ajouterPersonne (String nom, String prenom, Image photo){
+	public void ajouterPersonne (String nom, String prenom, int numero){
 		Identite p = new Identite();
-		p.setId(idp);
+		p.setPhoto(photo);
 		p.setNom(nom);
 		p.setPrenom(prenom);
-		p.setPhoto(photo);
-		//personnes.put(idp, p);
-		idp++;
+		p.setNumero(numero);
 		em.persist(p);
+		photo++;
 	}
 	
-	public Identite retourSuspect(Image photo) {
-		Identite p = em.find(Identite.class, photo);
-		//Identite p = new Identite();
+	public Identite retourSuspect(int numero) {
+		Identite p = em.find(Identite.class, numero); // clé primaire
 		return p;
 	}
+	
+    //##############################################################
+    // Code à ajouter pour rajouter la Login et Sign Up page
+
+    // Retourne vrai si l'utilisateur est déjà présent dans la BD
+    public Boolean isUserPresent(String username) {
+        User potentialUser = em.find(User.class, username);
+        return (potentialUser != null);
+    }
+
+    // Pour ajouter un utilisateur dans la BD
+    public void addUser(String username, String email, String password) {
+        User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(password);
+        em.persist(user);    // on push le nouveau user dans la BD
+    }
+
+    public String getUserPassword(String username) {
+        User user = em.find(User.class, username); // On cherche l'utilisateur dans la BD
+        return user.getPassword();
+    }
+    // Fin du code à rajouter pour la Login et Sign Up page
+    //###############################################################
 	
 }

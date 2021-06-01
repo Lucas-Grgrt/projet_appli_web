@@ -1,12 +1,16 @@
+<%@page import='moteur_police.*' %>
+<%@ page language="java" import='java.util.*' contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>RECHERCHE</title>
+<title>Rechercher fiches suspects</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="bloc4">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">N7 Investigation</a>
@@ -31,25 +35,33 @@
       </div>
     </div>
     </nav>
-    <div class="d-flex h-100  align-items-center ">
-        <div class="bloc1 d-flex flex-column align-center">
+    <div class="bloc4 d-flex h-100  align-items-center ">
+        <div class="bloc3 d-flex flex-column align-center">
             
-            <form action="Servlet" method="post">
-                <div class="d-flex p-2 bd-highlight justify-content-center">
-                    <div class="mb-3  col-3">
-                        <label for="exampleFormControlInput1" class="form-label">Renseigner son numéro de téléphone</label>
-                        <input type="text" class="form-control" id="numero" name="numero" placeholder="Numéro">
-                    </div>
+           
+            <div class="d-flex p-2 bd-highlight justify-content-center">
+                <div class="mb-2 col-2">
+                    <img src="classified.png" class="image" style="background:transparent">
                 </div>
-                <div class="d-flex p-2 bd-highlight justify-content-center">
-                        <input type="hidden" name="op" value="valider_recherche">
-                        <input class="btn btn-primary col-3" type="submit" value="Rechercher">
+                <div class="mb-3 col-3">
+                	<% Identite suspect = (Identite)request.getAttribute("suspect"); %>
+                    <h1 class="display-3"> <%= suspect.getNom() %> </h1>
+                    <h1 class="display-3"> <%= suspect.getPrenom() %>  </h1>
                 </div>
-                <div class="d-flex p-2 bd-highlight justify-content-center">
-                    <a class="btn btn-primary" href="accueil.html" role="button">Renseigner quelqu'un dans la base de données</a>
+                
+                
+                
+                <div class="mb-3 offset-md-1 col-3">
+                	<img src="Servlet?op=render_image&nom=<%=suspect.getNom()%>&prenom=<%=suspect.getPrenom()%>" class="img-thumbnail" alt="...">
                 </div>
-            </form>    
+            </div>
+            <div class="bloc_barre d-flex p-2 bd-highlight justify-content-center">
+                <a class="btn btn-primary" href="accueil.html" role="button">Renseigner quelqu'un dans la base de données</a>
+            </div>
+        
         </div>
     </div>
 </body>
+
+
 </html>

@@ -1,36 +1,56 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<html lang="en" >
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Ajouter</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="login_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>  
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'> 
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 </head>
-<body>
-    <div class="d-flex h-100  align-items-center ">
-        <div class="bloc1 d-flex flex-column align-center">
-            
-            <form action="/Servlet" method="post">
-                <div class="d-flex p-2 bd-highlight justify-content-center">
-                    <div class="mb-3 col-3">
-                        <label for="exampleFormControlInput1" class="form-label">Identité</label>
-                        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom">
-                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom">
-                    </div>
-                    <div class="mb-3 offset-md-1 col-3">
-                        <label for="formFile" class="form-label">Veuillez déposer la photo correspondante en .jpg</label>
-                        <input class="form-control" type="file" id="formFile">
-                    </div>
-                </div>
-                <div class="d-flex p-2 bd-highlight justify-content-center">
-                        <input type="hidden" name="op" value="valider_ajout">
-                        <input class="btn btn-primary col-7" type="submit" value="Soumettre">
-                </div>
-                <div class="d-flex p-2 bd-highlight justify-content-center">
-                    <a class="btn btn-primary" href="recherche.html" role="button">Rechercher quelqu'un dans la base de données</a>
-                </div>
-            </form>    
-        </div>
-    </div>
+
+<body class="body">
+
+<div class="login-page">
+  <div class="form">
+
+    <form action="Servlet" method="post" enctype="multipart/form-data">
+      <lottie-player src="https://assets4.lottiefiles.com/datafiles/XRVoUu3IX4sGWtiC3MPpFnJvZNq7lVWDCa8LSqgS/profile.json"  background="transparent"  speed="1"  style="justify-content: center;" loop  autoplay></lottie-player>
+      <input type="text" name="username" id="username" placeholder="&#xf007;  username"/>
+      <input type="password" name="password" id="password" placeholder="&#xf023;  password"/>
+      <input type="hidden" name="op" value="login">
+      <i class="fas fa-eye" onclick="show()"></i> 
+      <br>
+      <br>
+      <button>LOGIN</button>
+      <p class="message"></p>
+    </form>
+
+    <form class="login-form">
+    
+      <button type="button" onclick="window.location.href='signup.html'">SIGN UP</button>
+    </form>
+  </div>
+</div>
+
+  <script>
+    function show(){
+      var password = document.getElementById("password");
+      var icon = document.querySelector(".fas")
+
+      // ========== Checking type of password ===========
+      if(password.type === "password"){
+        password.type = "text";
+      }
+      else {
+        password.type = "password";
+      }
+    };
+  </script>
 </body>
 </html>
+
